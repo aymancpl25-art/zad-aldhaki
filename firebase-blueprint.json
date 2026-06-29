@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with type selection and budget limit",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "userType": { "type": "string", "enum": ["family", "employee", "student"] },
+        "budgetLimit": { "type": "number" },
+        "currency": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "fullName", "email", "userType", "budgetLimit", "currency"]
+    },
+    "MealPlan": {
+      "title": "MealPlan",
+      "description": "Flexible weekly or monthly meal plan",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "planType": { "type": "string", "enum": ["weekly", "monthly"] },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "meals": { "type": "object" }
+      },
+      "required": ["id", "userId", "planType", "startDate", "endDate", "meals"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Food-related budget transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "amount": { "type": "number" },
+        "category": { "type": "string" },
+        "date": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "amount", "category", "date", "notes"]
+    },
+    "ShoppingList": {
+      "title": "ShoppingList",
+      "description": "Smart checklist synced from meal plan or added manually",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "items": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "items", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Individual user profiles with roles and budgets"
+    },
+    "/users/{userId}/mealPlans/{planId}": {
+      "schema": "MealPlan",
+      "description": "Meal plans subcollection under each user"
+    },
+    "/users/{userId}/transactions/{txId}": {
+      "schema": "Transaction",
+      "description": "Budget transactions subcollection under each user"
+    },
+    "/users/{userId}/shoppingLists/{listId}": {
+      "schema": "ShoppingList",
+      "description": "Shopping list subcollection under each user"
+    }
+  }
+}

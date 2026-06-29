@@ -1,0 +1,6 @@
+{
+  "name": "Smart Meal Planner",
+  "description": "منصة زاد الذكي لتخطيط الوجبات الأسبوعية والشهرية، تتبع ميزانية الطعام للعائلات والطلاب والموظفين، ومزامنة قوائم التسوق والمشتريات بالكامل باللغة العربية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
